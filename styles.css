@@ -1,0 +1,27 @@
+body{
+    background-color: #BED6B9;
+    font-family: "ROboto", sans-serif;
+}
+
+.cadastro{
+    background-color: #D9D9D9;
+}
+
+p{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.barra-lateral ul{
+    list-style: none;
+}
+
+.barra-lateral{
+    background-color: #8AB88B;
+}
+
+.barra-lateral ul li a{
+    display: block; /* Faz com que o link ocupe toda a largura do elemento pai */
+    
+
+}  
