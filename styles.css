@@ -1,6 +1,6 @@
 body{
     background-color: #BED6B9;
-    font-family: "ROboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .cadastro{
@@ -13,15 +13,43 @@ p{
 }
 
 .barra-lateral ul{
+    padding: 10px;
+    display: block;
+    line-height: 25px;
     list-style: none;
+}
+
+.menu{
+    font-weight: bold;
+    font-size: 27px;
+    top: 0px;
+    padding: 10px;
 }
 
 .barra-lateral{
     background-color: #8AB88B;
+    height: 100%;
+    width: 180px;
+    padding: 10px;
+    position:fixed;
+    top : 0px;
+    left: 0px;
+}
+
+.barra-lateral ul li a:hover{
+    background-color: #668667;
 }
 
 .barra-lateral ul li a{
     display: block; /* Faz com que o link ocupe toda a largura do elemento pai */
-    
-
+    text-decoration: none;
+    color: black;
+    border: 2px solid #8AB88B;
+    padding: 5px;
+    text-align: left;
 }  
+
+.content{
+    margin-left: 230px;
+    padding: 20px; 
+}
