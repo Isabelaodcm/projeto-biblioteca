@@ -8,58 +8,60 @@
 </head>
 
 <body>
-    <div class = content>
-        <h1>Cadastrar Livro</h1>
-        <form>
-            <fieldset>
-                <div>
-                    <label>Nome</label>
-                    <input type = "text" class="inputs" ip = "titulo" required/>
-                </div>
-                <div>
-                    <label>Cidade</label>
-                    <input type = "text" class="inputs" ip = "autor" required/>
-                </div>
-                <div>
-                    <label>País</label>
-                    <input type = "text" class="inputs" required/>
-                </div>
-                <div>
-                    <label>CEP</label>
-                    <input type = "text" class="inputs" required/>
+    <div class = "content">
+        <h1>Cadastrar Editora</h1>
+        <form class="forms">
+            <div class = "input-group">
+                <label for = "nome-editora" >Nome</label>
+                <input type = "text" class="inputs" id = "nome-editora" required/>
+            </div>
     
-                </div>
-                <div>
-                    <label>Rua, número</label>
-                    <input type = "text" class="inputs"/>
-                </div>
-                <div>
-                    <label>Bairro</label>
-                    <input type = "text" class="inputs" required/>
-                </div>
-                <div>
-                    <label>Complemento</label>
-                    <input type = "text" class="inputs" required/>
-                </div>
+            <div class = "input-group">
+                <label for = "cidade-editora" >Cidade</label>
+                <input type = "text" class="inputs" id = "cidade-editora" required/>
+            </div>
 
-            </fieldset>
+
+            <div class = "input-group">
+                <label for = "cep-editora">CEP</label>
+                <input type = "text" class="inputs" id = "cep-editora"/>
+            </div>
+
+            <div class = "input-group">
+                <label for = "pais-editora">País</label>
+                <input type = "text" class="inputs" id = "pais-editora" required/>
+            </div>
+
+            <div class = "input-group">
+                <label for = "rua">Rua, número</label>
+                <input type = "text" class="inputs" id = "rua" required/>
+    
+            </div>
+
+            <div class = "input-group">
+                <label for = "bairro-editora" >Bairro</label>
+                <input type = "text" class="inputs" id = "bairro-editora" required/>
+            </div>
+
+            <button class="button" type = "submit">Cadastrar</button>
         </form>
 
-        <button class="button">Cadastrar</button>
     </div>
     
-    <section>
-        <div class = "barra-lateral">
-            <h1 class = "menu" >Menu</h1>
-            <ul>
-                <li><a href = "cadastrar_livro.html">Cadastrar Livro</a></li>
-                <li><a href = "livros.html">Todos os livros</a></li>
-                <li ><a href = "realizar-emprestimo.html">Empréstimos</a></li>
-                <li><a href = "cadastrar_autor.html">Cadastrar Autor</a></li>
-                <li ><a href = "cadastrar_editora.html">Cadastrar Editora</a></li>
-                
-            </ul>
-
-    </section>
+    <nav class = "barra-lateral">
+    
+        <h2 class = "menu" >Menu</h2>
+        <ul>
+            <li><a href = "cadastrar_livro.html">Cadastrar Livro</a></li>
+            <li><a href = "listar_livros.html">Todos os livros</a></li>
+            <li ><a href = "realizar-emprestimo.html">Empréstimos</a></li>
+            <li><a href = "cadastrar_autor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrar_editora.html">Cadastrar Editora</a></li>
+            
+        </ul>
+        </div class = "btn-sair">
+            <a href = "login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
 </body>
 </html>
