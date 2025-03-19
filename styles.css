@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy:wght@400;700&display=swap");
+
+/* estilo geral */ 
+body{
+    background-color: #ceeec8;
+    /* background-color: #BED6B9; */
+    /* background-color: #cae8c4; */
+    /* background-color: #b3d6ac; */
+    font-family: "Kantumruy", sans-serif;
+}
+
+.cadastro{
+    background-color: #D9D9D9;
+}
+
+p{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.menu{
+    font-weight: bold;
+    font-size: 29px;
+    top: 0px;
+    padding: 10px;
+}
+
+.barra-lateral ul{
+    padding: 10px;
+    display: block;
+    line-height: 25px;
+    list-style: none;
+}
+
+.barra-lateral{
+    background-color: #71ae72; 
+    /* background-color: #5e995f; */
+    /* background-color: #8AB88B; */
+    height: 100%;
+    width: 250px;
+    padding: 10px;
+    position:fixed;
+    top : 0px;
+    left: 0px;
+}
+
+.barra-lateral ul li a:hover{
+    background-color: #527553;
+    /* background-color: #668667; */
+}
+
+.barra-lateral ul li a{
+    display: block; /* Faz com que o link ocupe toda a largura do elemento pai */
+    text-decoration: none;
+    color: black;
+    border: 2px solid #71ae72;
+    /* border: 2px solid #5e995f; */
+    /* border: 2px solid #8AB88B; */
+    padding: 5px;
+    text-align: left;
+    font-size: 19px;
+}  
+
+.content{
+    margin-left: 350px;
+    padding: 20px; 
+}
+
+.forms{
+    display: grid;    /* Faz com que os elementos fiquem em linhas e colunas */
+    grid-template-columns: 1fr 1fr; /* Cria duas colunas com o mesmo tamanho */
+}
+
+
+form div label{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+input, textarea{
+    width: 350px;
+    padding: 10px;
+    border: 1.7px solid #534242;
+    border-radius: 7px;
+    background-color: #eaf4ee;
+    font-size: 15px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.button{
+    background-color: #668667;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 130px;
+    height: 45px;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 17px;
+
+}
+
+.button:hover{
+    background-color: #465c46;
+}
+
+/*ajustes especificos cadastro livros*/
+#descricao{
+    height: 80px;
+    font-family: "Roboto", sans-serif;
+    resize: none;
+}
+
+#isbn, #ano, #edicao, #qtd{
+    width: 120px;
+    font-size: 15px;
+}
+
+/* login e cadastro */
+.login-content{
+    background-color: #71ae72;
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    height: 100vh; /* Faz o body ocupar 100% da altura da tela */
+}
+
+.login-content h1{
+    text-align: center;
+    font-size: 40px;
+}
+
+.form-login{
+    /* flex-direction: column; */
+    border: 3px solid #534242;
+    border-radius: 20px;
+    background-color: #ceeec8;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 400px;   
+    align-items: center;
+}
+
+
+.input-group-login{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    font-size: 13px;
+}
+
+/* .botao-login{
+    background-color: #668667;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 130px;
+    height: 45px;
+    font-weight: bold;
+    font-size: 17px;
+} */

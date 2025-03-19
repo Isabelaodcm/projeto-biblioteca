@@ -4,38 +4,34 @@
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Cadastrar Autor</title>
-    <link rel = "stylesheet" href = "cadastrar-autor.css">
+    <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
-    <div class = "content">
+    <div class = content>
         <h1>Cadastrar Autor</h1>
-        <form>
-            <fieldset>
-                <div>
-                    <label>Nome</label>
-                    <input type = "text" class="inputs" ip = "titulo" required/>
-                </div>
-                <div>
-                    <label>Cidade</label>
-                    <input type = "text" class="inputs" ip = "autor" required/>
-                </div>
-                <div>
-                    <label>País</label>
-                    <input type = "text" class="inputs" required/>
-                </div>
-                <div>
-                    <label>Ano de Nascimento</label>
-                    <input type = "text" class="inputs" required/>
-    
-                </div>
+        <form class="forms">
+            <div class = "input-group">
+                <label>Nome</label>
+                <input type = "text" class="inputs" id = "nome" required/>
+            </div>
+            <div class = "input-group">
+                <label>Cidade</label>
+                <input type = "text" class="inputs" id = "cidade" required/>
+            </div>
+            <div class = "input-group">
+                <label>País</label>
+                <input type = "text" class="inputs" id = "pais" required/>
+            </div>
+            <div class = "input-group">
+                <label>Ano de Nascimento</label>
+                <input type = "text" class="inputs" id = "ano nasc" required/>
+            </div>
 
-            </fieldset>
+            <button class="button">Cadastrar</button>
         </form>
-
-        <button class="button">Cadastrar</button>
     </div>
-    
+
     <section>
         <div class = "barra-lateral">
             <h1 class = "menu" >Menu</h1>
@@ -47,6 +43,7 @@
                 <li ><a href = "cadastrar_editora.html">Cadastrar Editora</a></li>
                 
             </ul>
+        </div>
     </section>
 </body>
 </html>

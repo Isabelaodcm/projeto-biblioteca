@@ -54,7 +54,7 @@ p{
     padding: 20px; 
 }
 
-form fieldset div label{
+form div label{
     font-size: 17px;
     font-weight: bold;
 }
@@ -96,3 +96,4 @@ form fieldset{
 .button:hover{
     background-color: #465c46;
 }
+

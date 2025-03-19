@@ -43,3 +43,21 @@ body {
     padding: 20px;
   }
   
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+  
+  .inputs {
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
+  
