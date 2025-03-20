@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Editar Livro</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+
+<body>
+    <div class = content>
+        <h1>Editar Livro</h1>
+        <form class="forms">
+            <div class = "input-group">
+                <label for = "titulo" >Título</label>
+                <input type = "text" class="inputs" id = "titulo" required/>
+            </div>
+    
+            <div class = "input-group">
+                <label>Ano</label>
+                <input type = "text" class="inputs" id = "ano" required/>
+            </div>
+            <div class = "input-group">
+                <label>Autor*</label>
+                <input type = "text" class="inputs" id = "autor" value = "Machado de Assis" readonly/>
+            </div>
+            <div class = "input-group">
+                <label>ISBN</label>
+                <input type = "text" class="inputs" id = "isbn"/>
+            </div>
+            <div class = "input-group">
+                <label>Editora*</label>
+                <input type = "text" class="inputs" value="Saraiva" readonly/>
+    
+            </div>
+            <div class = "input-group">
+                <label>Edição</label>
+                <input type = "text" class="inputs" id = "edicao" required/>
+            </div>
+            <div class = "input-group">
+                <label>Observações</label>
+                <textarea id = "descricao" class="inputs" placeholder="Página rasgada, lombada danificada..."></textarea>
+            </div>
+
+            <div class = "input-group">
+                <label>Quantidade</label>
+                <input type = "text" class="inputs" id = "qtd" required/>
+            </div>
+
+        </form>
+        <button class="btnEditarLivro">Salvar alterações</button>
+        <button class="btnEditarLivro" type = "reset">Emprestar Livro</button> 
+
+    </div>
+    
+    <nav class = "barra-lateral">
+    
+        <h2 class = "menu" >Menu</h2>
+        <ul>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
+            
+        </ul>
+        </div class = "btn-sair">
+            <a href = "login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
+</body>
+</html>
+

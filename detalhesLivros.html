@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Cadastrar Editora</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+
+<body>
+    <div class="frameDetalhes">
+        <h2>Detalhes do Livro</h2>
+        <p><strong>Título:</strong> O Senhor dos Anéis</p>
+        <p><strong>Autor:</strong> J.R.R. Tolkien</p>
+        <p><strong>Editora:</strong> HarperCollins</p>
+        <p><strong>Ano de Publicação:</strong> 1954</p>
+        <p><strong>ISBN:</strong> 978-0-261-10221-7</p>
+        <p><strong>Edição:</strong> 1ª</p>
+        <p><strong>Status:</strong> Disponível</p>
+        <p><strong>Observações:</strong> Livro em ótimo estado.</p>
+
+    </div>
+    <div class = "background">
+        <div class = "content">
+            <h1>Todos os Livros</h1>
+            <div class = "searchbar">
+                <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar livro..."/>
+                <button type="submit" class="btn-search">Pesquisar Livros</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Editora</th>
+                        <th>Ano de Publicação</th>
+                        <th>Edição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Exemplo de linha de livro -->
+                    <tr>
+                        <td>O Senhor dos Anéis</td>
+                        <td>J.R.R. Tolkien</td>
+                        <td>HarperCollins</td>
+                        <td>1954</td>
+                        <td>1ª</td>
+                        <td>Disponível</td>
+                        <td>
+                            <button class="btnAcoes">Detalhes</button>
+                            <button class="btnAcoes">Editar</button>
+                            <button class="btnAcoes">Excluir</button>
+                        </td>
+                    </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+
+        </div>
+    
+        <nav class = "barra-lateral">
+            <h2 class = "menu" >Menu</h2>
+            <ul>
+                <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+                <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+                <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+                <li><a href = "listarLivros.html">Todos os Livros</a></li>
+                <li><a href = "listarAutores.html">Todos os Autores</a></li>
+                <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
+            
+            </ul>
+            </div class = "btn-sair">
+                <a href = "login.html" class="btn-sair">Sair</a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

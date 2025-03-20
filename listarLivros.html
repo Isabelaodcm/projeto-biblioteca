@@ -12,7 +12,11 @@
         <h1>Todos os Livros</h1>
         <div class = "searchbar">
             <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar livro..."/>
-            <button type="submit" class="btn-search">Pesquisar</button>
+            <button type="submit" class="btn-search">Pesquisar Livros</button>
+
+            <!-- <a  href = "livrosEmprestados.html" >
+                <button type="submit" class="btn-search">Ver livros emprestados</button>
+            </a> -->
         </div>
 
         <table>
@@ -36,6 +40,15 @@
                     <td>1954</td>
                     <td>1ª</td>
                     <td>Disponível</td>
+                    <td>
+                        <a href="detalhesLivros.html">
+                            <button class="btnAcoes">Detalhes</button>
+                        </a>
+                        <a href="editarLivro.html">
+                            <button class="btnAcoes">Editar</button>
+                        </a>
+                        <button class="btnAcoes">Excluir</button>
+                    </td>
                 </tr>
                 <!-- Adicione mais linhas conforme necessário -->
             </tbody>
@@ -46,11 +59,12 @@
     
         <h2 class = "menu" >Menu</h2>
         <ul>
-            <li><a href = "cadastrar_livro.html">Cadastrar Livro</a></li>
-            <li><a href = "listar_livros.html">Todos os livros</a></li>
-            <li ><a href = "realizar-emprestimo.html">Empréstimos</a></li>
-            <li><a href = "cadastrar_autor.html">Cadastrar Autor</a></li>
-            <li ><a href = "cadastrar_editora.html">Cadastrar Editora</a></li>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
             
         </ul>
         </div class = "btn-sair">

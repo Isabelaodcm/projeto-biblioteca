@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Todos os autores</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+
+<body>
+    <div class = "content">
+        <h1>Todos os Autores</h1>
+        <div class = "searchbar">
+            <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar autor..."/>
+            <button type="submit" class="btn-search">Pesquisar Autores</button>
+
+            
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>País</th>
+                    <th>Ano de Nascimento</th>
+                    <th>Ano de Falecimento</th>
+                    <th>Livros cadastrados</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de linha de livro -->
+                <tr>
+                    <td>Machado de Assis</td>
+                    <td>Rio de Janeiro</td>
+                    <td>Brasil</td>
+                    <td>1839</td>
+                    <td>1908</td>
+                    <td>10</td>
+                    <td>
+                        <a href="editarAutor.html">
+                            <button class="btnAcoes">Detalhes</button>
+                        </a>
+                        <a href="editarAutor.html">
+                            <button class="btnAcoes">Editar</button>
+                        </a>
+                        <button class="btnAcoes">Excluir</button>
+                    </td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+
+    </div>
+    
+    <nav class = "barra-lateral">
+    
+        <h2 class = "menu" >Menu</h2>
+        <ul>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
+            
+        </ul>
+        </div class = "btn-sair">
+            <a href = "login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
+</body>
+</html>

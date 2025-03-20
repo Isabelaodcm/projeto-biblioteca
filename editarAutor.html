@@ -3,13 +3,13 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Cadastrar Autor</title>
+    <title>Editar Autor</title>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
     <div class = content>
-        <h1>Cadastrar Autor</h1>
+        <h1>Editar Autor</h1>
         <form class="forms">
             <div class = "input-group">
                 <label>Nome</label>
@@ -25,22 +25,27 @@
             </div>
             <div class = "input-group">
                 <label>Ano de Nascimento</label>
-                <input type = "text" class="inputs" id = "ano nasc" required/>
+                <input type = "text" class="inputs" id = "anoNasc" required/>
             </div>
-
-            <button class="button">Cadastrar</button>
+            <div class = "input-group">
+                <label>Ano de Falecimento</label>
+                <input type = "text" class="inputs" id = "anoFal" />
+            </div>
         </form>
-    </div>
+        <button class="btnEditar">Salvar alterações</button>
 
+    </div>
+    
     <nav class = "barra-lateral">
     
         <h2 class = "menu" >Menu</h2>
         <ul>
-            <li><a href = "cadastrar_livro.html">Cadastrar Livro</a></li>
-            <li><a href = "listar_livros.html">Todos os livros</a></li>
-            <li ><a href = "realizar-emprestimo.html">Empréstimos</a></li>
-            <li><a href = "cadastrar_autor.html">Cadastrar Autor</a></li>
-            <li ><a href = "cadastrar_editora.html">Cadastrar Editora</a></li>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
             
         </ul>
         </div class = "btn-sair">
@@ -49,3 +54,4 @@
     </nav>
 </body>
 </html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Todas as Editoras</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+
+<body>
+    <div class = "content">
+        <h1>Todas as Editoras</h1>
+        <div class = "searchbar">
+            <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar editora..."/>
+            <button type="submit" class="btn-search">Pesquisar Editoras</button>
+
+            
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>País</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>Bairro</th>
+                    <th>Rua</th>
+                    <th>número</th>
+                    <th>Livros cadastrados</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de linha de livro -->
+                <tr>
+                    <td>Companhia das Letras</td>
+                    <td>Brasil</td>
+                    <td>São Paulo</td>
+                    <td>01234-567</td>
+                    <td>Centro</td>
+                    <td>Avenida Paulista</td>
+                    <td>1000</td>
+                    <td>50</td>
+                    <td>
+                        <a href="detalhesEditora.html">
+                            <button class="btnAcoes">Detalhes</button>
+                        </a>
+                        <a href="editarEditora.html">
+                            <button class="btnAcoes">Editar</button>
+                        </a>
+                        <button class="btnAcoes">Excluir</button>
+                    </td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+
+    </div>
+    
+    <nav class = "barra-lateral">
+    
+        <h2 class = "menu" >Menu</h2>
+        <ul>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
+            
+        </ul>
+        </div class = "btn-sair">
+            <a href = "login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
+</body>
+</html>
