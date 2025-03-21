@@ -118,6 +118,7 @@ input, textarea, .opcoes{
 .opcoes{
     width: 160px;
 }
+
 .button{
     background-color: #668667;
     border: 1px solid #534242;
@@ -213,7 +214,7 @@ input, textarea, .opcoes{
     color: white;
     padding: 10px;
     text-align: center;
-    width: 160px;
+    width: 120px;
     height: 40px;
     margin-left: 15px;
     font-weight: bold;
@@ -242,6 +243,7 @@ table{
 th, td{
     padding: 10px;
     text-align: center;
+    align-items: center;
 }
 thead{
     background-color: #677F5A;

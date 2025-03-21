@@ -3,38 +3,55 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Cadastrar Autor</title>
+    <title>Cadastrar Livro</title>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
     <div class = content>
-        <h1>Cadastrar Autor</h1>
+        <h1>Emprestar Livro</h1>
         <form class="forms">
             <div class = "input-group">
-                <label>Nome</label>
-                <input type = "text" class="inputs" id = "nome" required/>
+                <label for = "titulo" >Título</label>
+                <input type = "text" class="inputs" id = "titulo" required/>
+            </div>
+    
+            <div class = "input-group">
+                <label>Código do livro a ser emprestado</label>
+                <input type = "number" class="inputs" id = "codigo" required/>
             </div>
             <div class = "input-group">
-                <label>Cidade</label>
-                <input type = "text" class="inputs" id = "cidade" required/>
+                <label>Nome do Aluno</label>
+                <input type = "text" class="inputs" id = "aluno" required/>
             </div>
             <div class = "input-group">
-                <label>País</label>
-                <input type = "text" class="inputs" id = "pais" required/>
+                <label>Email</label>
+                <input type = "email" class="inputs" id = "emailAluno"/>
             </div>
             <div class = "input-group">
-                <label>Ano de Nascimento</label>
-                <input type = "text" class="inputs" id = "anoNasc" required/>
+                <label>Telefone</label>
+                <input type = "text" class="inputs" required/>
+    
             </div>
             <div class = "input-group">
-                <label>Ano de Falecimento</label>
-                <input type = "text" class="inputs" id = "anoFal" />
+                <label for = "cpf">CPF</label>
+                <input type = "text" class="inputs" id = "cpf" required/>
+            </div>
+            <div class = "input-group">
+                <label>Data de Empréstimo</label>
+                <input  type="date" id = "dataEmprestimo" class="inputs">
+            </div>
+
+            <div class = "input-group">
+                <label>Data de Devolução</label>
+                <input type = "date"  id = "dataDevolucao" class="inputs">
             </div>
         </form>
-        <button class="button">Cadastrar</button>
-    </div>
 
+        <button class="btnEditarLivro">Confirmar Empréstimo</button>
+
+    </div>
+    
     <nav class = "barra-lateral">
     
         <h2 class = "menu" >Menu</h2>
@@ -47,11 +64,12 @@
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
             <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li>
 
-            
         </ul>
+
         </div class = "btn-sair">
             <a href = "login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
 </body>
 </html>
+

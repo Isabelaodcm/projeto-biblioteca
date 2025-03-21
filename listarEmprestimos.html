@@ -3,52 +3,55 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Todas as Editoras</title>
+    <title>Todos os Empréstimos</title>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
     <div class = "content">
-        <h1>Todas as Editoras</h1>
+        <h1>Todos os Empréstimos</h1>
         <div class = "searchbar">
-            <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar editora..."/>
+            <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar livro..."/>
             <button type="submit" class="btn-search">Pesquisar</button>
 
-            
+            <!-- <a  href = "livrosEmprestados.html" >
+                <button type="submit" class="btn-search">Ver livros emprestados</button>
+            </a> -->
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>País</th>
-                    <th>Cidade</th>
-                    <th>CEP</th>
-                    <th>Bairro</th>
-                    <th>Rua</th>
-                    <th>número</th>
-                    <th>Livros cadastrados</th>
+                    <th>Título</th>
+                    <th>Aluno</th>
+                    <th>Data Empréstimo</th>
+                    <th>Data Devolução</th>
+                    <th>Status</th> <!-- Pendente/devolvido/atrasado -->
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Exemplo de linha de livro -->
                 <tr>
-                    <td>Companhia das Letras</td>
-                    <td>Brasil</td>
-                    <td>São Paulo</td>
-                    <td>01234-567</td>
-                    <td>Centro</td>
-                    <td>Avenida Paulista</td>
-                    <td>1000</td>
-                    <td>50</td>
+                    <td>O Senhor dos Anéis</td>
+                    <td>Isabela Oliveira da Castro</td>
+                    <td>10/03/2025</td>
+                    <td>30/03/2025</td>
                     <td>
-                        <a href="detalhesEditora.html">
-                            <!-- <button class="btnAcoes">Detalhes</button> -->
+                        <select class = "opcoes">
+                            <option>Pendente</option>
+                            <option>Devolvido</option>
+                            <option>Atrasado</option>
+                        </select>
+                    <td>
+                        <!-- <a href="detalhesEmprestimo.html">
+                            <button class="btnAcoes">Detalhes</button>
                         </a>
-                        <a href="editarEditora.html">
+                        <a href="editarEmprestimo.html">
                             <button class="btnAcoes">Editar</button>
-                        </a>
+                        </a> -->
+                        <button class="btnAcoes">Detalhes</button>
+                        <button class="btnAcoes">Editar</button>
                         <button class="btnAcoes">Excluir</button>
                     </td>
                 </tr>
