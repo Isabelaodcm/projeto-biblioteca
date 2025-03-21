@@ -6,7 +6,8 @@ body{
     /* background-color: #BED6B9; */
     /* background-color: #cae8c4; */
     /* background-color: #b3d6ac; */
-    font-family: "Kantumruy", sans-serif;
+    /* font-family: "Kantumruy", sans-serif; */
+    font-family: 'Segoe UI', sans-serif;
 }
 
 .cadastro{
@@ -76,7 +77,7 @@ p{
     /* border: 2px solid #8AB88B; */
     padding: 5px;
     text-align: left;
-    font-weight: 500;
+    font-weight: 450;
     font-size: 19px;
 }  
 
@@ -93,12 +94,12 @@ p{
 
 
 form div label{
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
+    font-weight: 600;
 }
 
 
-input, textarea{
+input, textarea, .opcoes{
     width: 350px;
     padding: 10px;
     border: 1.7px solid #534242;
@@ -107,13 +108,16 @@ input, textarea{
     font-size: 15px;
 }
 
-.input-group{
+.input-group, .opcoes{
     display:flex;
     flex-direction: column;
     margin-bottom: 10px;
     padding: 5px;
 }
 
+.opcoes{
+    width: 160px;
+}
 .button{
     background-color: #668667;
     border: 1px solid #534242;
@@ -148,7 +152,7 @@ input, textarea{
     box-shadow: 2px 2px 10px #00000033;
 }
 
-.btnAcoes:hover, .btnEditar:hover, .btnEditarLivro:hover{
+.btnAcoes:hover, .btnEditar:hover, .btnEditarLivro:hover, .buttonModal:hover{
     background-color: #465c46;
 }
 
@@ -190,7 +194,7 @@ input, textarea{
 }
 
 #isbn, #ano, #edicao, #qtd{
-    width: 120px;
+    width: 140px;
     font-size: 15px;
 }
 
@@ -249,23 +253,52 @@ tbody tr:hover {
 }
 
 /* detalhes livro */
-.frameDetalhes {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* centraliza o frame */
+
+/* O conteúdo do modal */
+/* .tituloModal{
+    background-color: #71ae72;
+    padding: 0px;
+    width: 100%;
+} */
+
+.modalContent {
     background-color: #e4ebe5;
-    padding: 15px;
-    border: 1.7px solid #534242;
-    width: 600px; /* largura do frame */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Garante que o frame fique acima do fundo */
-    pointer-events: auto
+    margin: 15% auto;
+    padding-left: 20px;
+    width: 40%;
+    border-radius: 9px;
+    text-align: left;
+    position: absolute;
+    border: 3px solid #534242;
+    margin-top: 110px;
+    margin-left: 500px;
 }
 
-.background {
-    pointer-events: none; 
+.modal {
+    display: block; 
+    position: fixed; /*isso que faz o fundo ficar escurecido*/
+    z-index: 1; /* Fica acima do conteúdo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente */
+}
+
+.buttonModal{
+    background-color: #668667;
+    border: 1px solid #534242;
+    border-radius: 7px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 130px;
+    height: 45px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 2px 2px 10px #00000033;
 }
 
 /* login e cadastro */
