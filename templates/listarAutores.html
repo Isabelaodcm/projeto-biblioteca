@@ -29,7 +29,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id = "autores">
                 <!-- Exemplo de linha de livro -->
                 <tr>
                     <td>Machado de Assis</td>
@@ -70,5 +70,46 @@
             <a href = "login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('http://localhost:8080/autor/lista-autores')
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    let listaAutores = document.getElementById("autores");
+                    
+                    data.forEach( (autor) => {
+                        const tr = document.createElement("tr");
+                        tr.value = autor.id;
+                        tr.innerHTML = `
+                <td>${autor.nome} </td>
+                <td>${autor.cidade} </td>
+                <td>${autor.pais} </td>
+                <td>${autor.anoNasc} </td>
+                <td>${autor.anoFalesc} </td>
+                <td>${autor.livrosCad} </td>
+                <td>
+                    <a href="editarAutor.html">
+                            <button class="btnAcoes">Editar</button>
+                    </a>
+                    <button class="btnAcoes" value= "${autor.id}">Excluir</button></td>
+                `;
+                
+                        // const autorNome = document.createElement("td");
+                        // autorNome.textContent = data.nome;
+
+                        // const cidade = document.createElement("td");
+                        // cidade.textContent = data.cidade;
+
+                        // autor.appendChild(autorNome);
+                        // autor.appendChild(cidade);
+
+                        listaAutores.appendChild(tr);
+
+                });
+            });
+        });
+    </script>
 </body>
 </html>

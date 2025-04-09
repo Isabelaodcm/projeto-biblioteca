@@ -70,5 +70,45 @@
             <a href = "login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
+
+    <script>
+        var botaoCadastro = document.getElementById("cadastrar");
+        console.log(botaoCadastro)
+        
+        botaoCadastro.addEventListener("click", function() {
+            const dadosEditora = {
+                nome: "Editora Livros & Cia",
+                rua: "Rua das Letras",
+                numero: 123,
+                cidade: "São Paulo",
+                pais: "Brasil",
+                cep: "01311-000",
+                bairro: "Bela Vista",
+                livrosCad: 250
+            };
+    
+            fetch("http://localhost:8080/editora/cadastrar", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dadosEditora)
+            })
+            .then(response => {
+                if (!response.ok) {
+                throw new Error("Erro ao cadastrar editora");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Editora cadastrada com sucesso:", data);
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+            });
+           
+        });
+        
+    </script>
 </body>
 </html>

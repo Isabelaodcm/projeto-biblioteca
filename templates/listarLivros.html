@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang = "pt-br">
+<html lang="pt-br">
+
 <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todos os Livros</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class = "content">
+    <div class="content">
         <h1>Todos os Livros</h1>
-        <div class = "searchbar">
-            <input type="text" class="input-searchbar" id = "pesquisar" placeholder="Pesquisar livro..."/>
+        <div class="searchbar">
+            <input type="text" class="input-searchbar" id="pesquisar" placeholder="Pesquisar livro..." />
             <button type="submit" class="btn-search">Pesquisar</button>
 
             <!-- <a  href = "livrosEmprestados.html" >
@@ -31,7 +32,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="livros">
                 <!-- Exemplo de linha de livro -->
                 <tr>
                     <td>O Senhor dos Anéis</td>
@@ -50,27 +51,56 @@
                         <button class="btnAcoes">Excluir</button>
                     </td>
                 </tr>
+
                 <!-- Adicione mais linhas conforme necessário -->
             </tbody>
 
     </div>
-    
-    <nav class = "barra-lateral">
-    
-        <h2 class = "menu" >Menu</h2>
+
+    <nav class="barra-lateral">
+
+        <h2 class="menu">Menu</h2>
         <ul>
-            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
-            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
-            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
-            <li><a href = "listarLivros.html">Todos os Livros</a></li>
-            <li><a href = "listarAutores.html">Todos os Autores</a></li>
-            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
-            <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li>
-            
+            <li><a href="cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href="cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li><a href="cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href="listarLivros.html">Todos os Livros</a></li>
+            <li><a href="listarAutores.html">Todos os Autores</a></li>
+            <li><a href="listarEditoras.html">Todas as Editoras</a></li>
+            <li><a href="listarEmprestimos.html">Todos os Empréstimos</a></li>
+
         </ul>
-        </div class = "btn-sair">
-            <a href = "login.html" class="btn-sair">Sair</a>
+        </div class="btn-sair">
+        <a href="login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('http://localhost:8080/livro/lista-livros')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    var livros = document.getElementById("livros");
+                    const livro = document.createElement("tr");
+
+                    const autorNome = document.createElement("td");
+                    autorNome.textContent = data[0].autor.nome;
+
+                    const anoPublicacao = document.createElement("td");
+                    anoPublicacao.textContent = data[0].anoPublicacao;
+
+                    livro.appendChild(autorNome);
+                    livro.appendChild(anoPublicacao);
+
+                    livros.appendChild(livro);
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+
+                });
+        });
+    </script>
 </body>
+
 </html>
