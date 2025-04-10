@@ -23,6 +23,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Código</th>
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Editora</th>
@@ -35,6 +36,7 @@
             <tbody id="livros">
                 <!-- Exemplo de linha de livro -->
                 <tr>
+                    <td>0</td>
                     <td>O Senhor dos Anéis</td>
                     <td>J.R.R. Tolkien</td>
                     <td>HarperCollins</td>
@@ -75,31 +77,65 @@
         </div>
     </nav>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function(){
             fetch('http://localhost:8080/livro/lista-livros')
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                let listaLivros = document.getElementById("livros")
 
-                    var livros = document.getElementById("livros");
-                    const livro = document.createElement("tr");
-
-                    const autorNome = document.createElement("td");
-                    autorNome.textContent = data[0].autor.nome;
-
-                    const anoPublicacao = document.createElement("td");
-                    anoPublicacao.textContent = data[0].anoPublicacao;
-
-                    livro.appendChild(autorNome);
-                    livro.appendChild(anoPublicacao);
-
-                    livros.appendChild(livro);
-                })
-                .catch(error => {
-                    console.error("Erro na requisição:", error);
-
+                data.forEach((livro) => {
+                    const tr = document.createElement("tr");
+                    tr.value = livro.id;
+                    tr.innerHTML = `
+                    <td>${livro.id} </td>
+                    <td>${livro.titulo} </td>
+                    <td>${livro.autor.nome} </td>
+                    <td>${livro.editora.nome} </td>
+                    <td>${livro.anoPublicacao} </td>
+                    <td>${livro.edicao} </td>
+                    <td>${livro.status} </td>
+                    <td>
+                    <a href="detalhesLivros.html">
+                            <button class="btnAcoes">Detalhes</button>
+                    </a>
+                    <a href="editarAutor.html">
+                            <button class="btnAcoes">Editar</button>
+                    </a>
+                    <button id = "btnExcluir" class="btnAcoes" value= "${livro.id}">Excluir</button></td>
+                `;
+                        listaLivros.appendChild(tr);            
                 });
+            });
         });
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     fetch('http://localhost:8080/livro/lista-livros')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log(data);
+        //             var livros = document.getElementById("livros");
+
+        //             const livro = document.createElement("tr");
+
+        //             const titulo = document.createElement("td");
+        //             titulo.textContent = data[0].titulo;
+
+        //             const autorNome = document.createElement("td");
+        //             autorNome.textContent = data[0].autor.nome;
+
+        //             const anoPublicacao = document.createElement("td");
+        //             anoPublicacao.textContent = data[0].anoPublicacao;
+
+        //             livro.appendChild(autorNome);
+        //             livro.appendChild(anoPublicacao);
+
+        //             livros.appendChild(livro);
+        //         })
+        //         .catch(error => {
+        //             console.error("Erro na requisição:", error);
+
+        //         });
+        // });
     </script>
 </body>
 

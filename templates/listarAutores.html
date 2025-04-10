@@ -20,6 +20,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Código</th>
                     <th>Nome</th>
                     <th>Cidade</th>
                     <th>País</th>
@@ -32,6 +33,7 @@
             <tbody id = "autores">
                 <!-- Exemplo de linha de livro -->
                 <tr>
+                    <td>0</td>
                     <td>Machado de Assis</td>
                     <td>Rio de Janeiro</td>
                     <td>Brasil</td>
@@ -79,37 +81,53 @@
                     console.log(data);
                     let listaAutores = document.getElementById("autores");
                     
-                    data.forEach( (autor) => {
+                    data.forEach((autor) => {
                         const tr = document.createElement("tr");
                         tr.value = autor.id;
                         tr.innerHTML = `
-                <td>${autor.nome} </td>
-                <td>${autor.cidade} </td>
-                <td>${autor.pais} </td>
-                <td>${autor.anoNasc} </td>
-                <td>${autor.anoFalesc} </td>
-                <td>${autor.livrosCad} </td>
-                <td>
+                    <td>${autor.id|| '-'} </td>
+                    <td>${autor.nome|| '-'} </td>
+                    <td>${autor.cidade|| '-'} </td>
+                    <td>${autor.pais || '-'} </td>
+                    <td>${autor.anoNasc || '-'} </td>
+                    <td>${autor.anoFalesc || '-'} </td>
+                    <td>${autor.livrosCad || '-'} </td>
+                    <td>
                     <a href="editarAutor.html">
                             <button class="btnAcoes">Editar</button>
                     </a>
-                    <button class="btnAcoes" value= "${autor.id}">Excluir</button></td>
+                    <button class="btnExcluir" value= "${autor.id}">Excluir</button></td>
                 `;
-                
-                        // const autorNome = document.createElement("td");
-                        // autorNome.textContent = data.nome;
-
-                        // const cidade = document.createElement("td");
-                        // cidade.textContent = data.cidade;
-
-                        // autor.appendChild(autorNome);
-                        // autor.appendChild(cidade);
-
                         listaAutores.appendChild(tr);
 
                 });
             });
         });
+        
+        
+        function excluirAutor(autorId, botao) {
+            fetch(`http://localhost:8080/autor/excluir-autor/${autorId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if(response.ok){
+                    alert("Autor excluído com sucesso!")
+                } else{
+                    alert("Erro ao excluir o autor.");
+                    return response.text().then((text) => {});
+                }
+            })
+        }
+
+        document
+        .querySelector("tbody")
+        .addEventListener("click", function (event){
+            if(event.target.classList.contains("btnExcluir")){
+                const autorId = event.target.getAttribute("value");
+                excluirAutor(autorId, event.target);
+            }
+        });
+
     </script>
 </body>
 </html>

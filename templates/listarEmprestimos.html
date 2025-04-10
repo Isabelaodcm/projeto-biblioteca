@@ -22,6 +22,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Código</th>
                     <th>Título</th>
                     <th>Aluno</th>
                     <th>Data Empréstimo</th>
@@ -30,9 +31,10 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id = "emprestimos">
                 <!-- Exemplo de linha de livro -->
                 <tr>
+                    <td>0</td>
                     <td>O Senhor dos Anéis</td>
                     <td>Isabela Oliveira de Castro</td>
                     <td>10/03/2025</td>
@@ -77,5 +79,35 @@
             <a href = "login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            fetch('http://localhost:8080/emprestimo/lista-emprestimos')
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                let listaEmprestimos = document.getElementById("emprestimos")
+
+                data.forEach( (emprestimo) => {
+                    const tr = document.createElement("tr");
+                    tr.value = emprestimo.id;
+                    tr.innerHTML = `
+                    <td> ${emprestimo.id} </td>
+                    <td> ${emprestimo.livro.titulo|| '-'} </td>
+                    <td> ${emprestimo.cliente.nome|| '-'} </td>
+                    <td> ${emprestimo.dataEmp|| '-'} </td>
+                    <td> ${emprestimo.dataDev|| '-'} </td>
+                    <td> ${emprestimo.status|| '-'} </td>
+                    <a href="editarAutor.html">
+                            <button class="btnAcoes">Editar</button>
+                    </a>
+                    <button class="btnExcluir" value= "${emprestimo.id}">Excluir</button></td>
+                `;
+                    listaEmprestimos.appendChild(tr);
+
+                });
+            });
+        });
+    </script>
 </body>
 </html>
