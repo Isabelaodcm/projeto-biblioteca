@@ -89,12 +89,12 @@
                     tr.value = livro.id;
                     tr.innerHTML = `
                     <td>${livro.id} </td>
-                    <td>${livro.titulo} </td>
-                    <td>${livro.autor.nome} </td>
-                    <td>${livro.editora.nome} </td>
-                    <td>${livro.anoPublicacao} </td>
-                    <td>${livro.edicao} </td>
-                    <td>${livro.status} </td>
+                    <td>${livro.titulo|| '-'} </td>
+                    <td>${livro.autor.nome|| '-'} </td>
+                    <td>${livro.editora.nome|| '-'} </td>
+                    <td>${livro.anoPublicacao|| '-'} </td>
+                    <td>${livro.edicao|| '-'} </td>
+                    <td>${livro.status|| '-'} </td>
                     <td>
                     <a href="detalhesLivros.html">
                             <button class="btnAcoes">Detalhes</button>

@@ -13,23 +13,21 @@
         <form class="forms">
             <div class = "input-group">
                 <label for = "nomeEditora" >Nome</label>
-                <input type = "text" class="inputs" id = "nomeEditora" required/>
+                <input type = "text" class="inputs" id = "nome" required/>
             </div>
     
             <div class = "input-group">
                 <label for = "cidadeEditora" >Cidade</label>
-                <input type = "text" class="inputs" id = "cidadeEditora" required/>
+                <input type = "text" class="inputs" id = "cidade" required/>
             </div>
-
-
             <div class = "input-group">
                 <label for = "cepEditora">CEP</label>
-                <input type = "text" class="inputs" id = "cepEditora"/>
+                <input type = "text" class="inputs" id = "cep"/>
             </div>
 
             <div class = "input-group">
                 <label for = "paisEditora">País</label>
-                <input type = "text" class="inputs" id = "paisEditora" required/>
+                <input type = "text" class="inputs" id = "pais" required/>
             </div>
             <div class = "input-group">
                 <label for = "rua">Rua</label>
@@ -43,12 +41,11 @@
 
             <div class = "input-group">
                 <label for = "bairro-editora" >Bairro</label>
-                <input type = "text" class="inputs" id = "bairroEditora" required/>
+                <input type = "text" class="inputs" id = "bairro" required/>
             </div>
 
-            
+            <button id = "cadastrar" class="button" type = "submit">Cadastrar</button>
         </form>
-        <button class="button" type = "submit">Cadastrar</button>
 
     </div>
     
@@ -72,41 +69,47 @@
     </nav>
 
     <script>
-        var botaoCadastro = document.getElementById("cadastrar");
-        console.log(botaoCadastro)
-        
-        botaoCadastro.addEventListener("click", function() {
+        var botaoCadastro = document.getElementById("cadastrar")
+
+        botaoCadastro.addEventListener("click", function(){
+            event.preventDefault();
             const dadosEditora = {
-                nome: "Editora Livros & Cia",
-                rua: "Rua das Letras",
-                numero: 123,
-                cidade: "São Paulo",
-                pais: "Brasil",
-                cep: "01311-000",
-                bairro: "Bela Vista",
-                livrosCad: 250
+                nome: document.getElementById("nome").value,
+                cidade: document.getElementById("cidade").value,
+                pais: document.getElementById("pais").value,
+                cep: document.getElementById("cep").value,
+                rua: document.getElementById("rua").value,
+                numero: document.getElementById("numero").value,
+                bairro: document.getElementById("bairro").value
             };
-    
-            fetch("http://localhost:8080/editora/cadastrar", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dadosEditora)
-            })
-            .then(response => {
-                if (!response.ok) {
-                throw new Error("Erro ao cadastrar editora");
+            if(dadosEditora.nome == "" || dadosEditora.cidade == "" || dadosEditora.pais == "" || dadosEditora.cep == "" ||dadosEditora.rua == "" 
+                || dadosEditora.numero == "" || dadosEditora.bairro == ""){
+                    alert("Preencha todos os campos!")
+                } else{
+                    try{
+                        fetch("http://localhost:8080/editora/cadastrar",{
+                            method: 'POST',
+                            headers:{
+                            "Content-Type":"application/json"
+                            },
+                            body: JSON.stringify(dadosEditora)
+                        }).then(async res => {
+                            if(res.ok){
+                                alert("Editora cadastrada com sucesso!")
+                            } else{
+                                const erroData = await res.json();
+                                erroData.errors.forEach(element => {
+                                    throw new Error(element.defaultMessage)
+                                });
+                            }
+                        }).catch(error => {
+                            alert(error.message);
+                        });
+                    } catch(error){
+                        alert(error);
+                    }
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Editora cadastrada com sucesso:", data);
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-            });
-           
+
         });
         
     </script>

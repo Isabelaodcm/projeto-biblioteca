@@ -3,64 +3,35 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Cadastrar Livro</title>
+    <title>Cadastrar Empréstimo</title>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
     <div class = content>
-        <h1>Cadastrar Livro</h1>
+        <h1>Cadastrar Empréstimo</h1>
         <form class="forms">
             <div class = "input-group">
-                <label for = "titulo" >Título</label>
-                <input type = "text" class="inputs" id = "titulo" required/>
-            </div>
-    
-            <div class = "input-group">
-                <label>Ano</label>
-                <input type = "text" class="inputs" id = "ano" required/>
-            </div>
-            <!-- <div class = "input-group">
-                <label>Autor</label>
-                <input type = "text" class="inputs" id = "autor" required/>
-            </div> -->
-            <div class = "input-group">
-                <label>Autor</label>
-                <select class="opcoes1" id="autor">
-                    <option value="">Selecione um autor</option>
+                <label>Livro</label>
+                <select class="opcoes1" id="livro">
+                    <option value="">Selecione um livro</option>
                 </select>
             </div>
 
             <div class = "input-group">
-                <label>ISBN</label>
-                <input type = "text" class="inputs" id = "isbn"/>
-            </div>
-            <!-- <div class = "input-group">
-                <label>Editora</label>
-                <input type = "text" class="inputs" />
-            </div> -->
-            <div class = "input-group">
-                <label>Editora</label>
-                <select class="opcoes1" id="editora">
-                    <option value="">Selecione uma Editora</option>
+                <label>Cliente</label>
+                <select class="opcoes1" id="cliente">
+                    <option value="">Selecione um cliente</option>
                 </select>
             </div>
             <div class = "input-group">
-                <label>Edição</label>
-                <input type = "text" class="inputs" id = "edicao" required/>
-            </div>
-            <div class = "input-group">
-                <label>Observações</label>
-                <textarea id = "obs" class="inputs" placeholder="Página rasgada, lombada danificada..."></textarea>
+                <label>Data de Empréstimo</label>
+                <input type = "date" class="inputs" id = "dataEmp" required/>
             </div>
 
             <div class = "input-group">
-                <label>Estado</label>
-                <select class = "opcoes" id = "estado">
-                    <option value="NOVO">Novo</option>
-                    <option value="BOM">Bom</option>
-                    <option value="DANIFICADO">Danificado</option>
-                </select>
+                <label>Data de Devolução</label>
+                <input type = "date" class="inputs" id = "dataDev" required/>
             </div>
         
             <button id="cadastrar" class="button">Cadastrar</button>
@@ -75,7 +46,7 @@
             <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
-            <li><a href= "cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -90,35 +61,35 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function(){
-        fetch("http://localhost:8080/autor/lista-autores")
+        fetch("http://localhost:8080/livro/lista-livros")
         .then(res => res.json())
         .then(data => {
-            let dropdown = document.getElementById("autor");
+            let dropdown = document.getElementById("livro");
 
-            data.forEach(autor => {
+            data.forEach(livro => {
                 let option = document.createElement("option");
-                option.value = autor.id;
-                option.textContent = `${autor.nome}`;
+                option.value = livro.id;
+                option.textContent = `${livro.titulo}`;
                 dropdown.appendChild(option);
             })
         })
     })
 
     document.addEventListener("DOMContentLoaded", function(){
-        fetch("http://localhost:8080/editora/lista-editoras")
+        fetch("http://localhost:8080/cliente/lista-clientes")
         .then(res => res.json())
         .then((data) => {
 
-            let dropdown = document.getElementById("editora");
+            let dropdown = document.getElementById("cliente");
 
-            data.forEach(editora => {
+            data.forEach(cliente => {
                 let option = document.createElement("option");
-                option.value = editora.id;
-                option.textContent = `${editora.nome}`;
+                option.value = cliente.id;
+                option.textContent = `${cliente.nome}`;
                 dropdown.appendChild(option);
             })
         })
-        .catch(error => console.error("Erro ao carregar as editoras: ", error));
+        .catch(error => console.error("Erro ao carregar os clientes: ", error));
     })
 
     var botaoCadastro = document.getElementById("cadastrar");
@@ -126,31 +97,27 @@
     
     botaoCadastro.addEventListener("click", function() {
         event.preventDefault(); //impede que a pagina recarregue automaticamente depois de realizar o cadastro
-        const dadosLivro = {
-            titulo: document.getElementById('titulo').value,
-            anoPublicacao: document.getElementById('ano').value,
-            isbn: document.getElementById('isbn').value,
-            autor: {id: parseInt(document.getElementById("autor").value)},
-            editora: {id: parseInt(document.getElementById("editora").value)},
-            obs: document.getElementById('obs').value,
-            edicao: document.getElementById('edicao').value,
-            estadoCons: document.getElementById('estado').value,
+        const dadosEmp = {
+            livro: {id: parseInt(document.getElementById("livro").value)},
+            cliente: document.getElementById("cliente").value,
+            dataEmp: document.getElementById('dataEmp').value,
+            dataDev: document.getElementById('dataDev').value
             
         };
         
-        if(dadosLivro.titulo == "" || dadosLivro.autor == "" || dadosLivro.editora == "" || dadosLivro.isbn == "" || dadosLivro.edicao == "" || dadosLivro.estadoCons == ""){
+        if(dadosEmp.livro == "" || dadosEmp.cliente == "" || dadosEmp.dataDev == "" || dadosEmp.dataEmp == "" ){
             alert("Preencha todos os campos!");
         } else {
             try{
-                fetch("http://localhost:8080/livro/cadastrar-livro", {
+                fetch("http://localhost:8080/emprestimo/cadastrar", {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(dadosLivro) //converte os dados para json
+                    body: JSON.stringify(dadosEmp) //converte os dados para json
                 }).then(async res => {
                     if(res.ok){
-                        alert("Livro cadastrado com sucesso!")
+                        alert("Empréstimo cadastrado com sucesso!")
                     } else{
                         const errorData = await res.json();
                         errorData.errors.forEach(element => {
