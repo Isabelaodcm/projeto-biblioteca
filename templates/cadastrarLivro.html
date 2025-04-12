@@ -154,7 +154,7 @@
                     } else{
                         const errorData = await res.json();
                         errorData.errors.forEach(element => {
-                            throw new Error(element.defaultMesage)
+                            throw new Error(element.defaultMessage)
                         });
                     }
                 }).catch(error => {

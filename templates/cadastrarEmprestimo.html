@@ -99,7 +99,7 @@
         event.preventDefault(); //impede que a pagina recarregue automaticamente depois de realizar o cadastro
         const dadosEmp = {
             livro: {id: parseInt(document.getElementById("livro").value)},
-            cliente: document.getElementById("cliente").value,
+            cliente: {id: parseInt(document.getElementById("cliente").value)},  
             dataEmp: document.getElementById('dataEmp').value,
             dataDev: document.getElementById('dataDev').value
             
@@ -109,6 +109,7 @@
             alert("Preencha todos os campos!");
         } else {
             try{
+                console.log("Dados enviados:", dadosEmp);
                 fetch("http://localhost:8080/emprestimo/cadastrar", {
                     method: 'POST',
                     headers: {
@@ -120,9 +121,16 @@
                         alert("Empréstimo cadastrado com sucesso!")
                     } else{
                         const errorData = await res.json();
-                        errorData.errors.forEach(element => {
-                            throw new Error(element.defaultMesage)
-                        });
+                        console.log("Erro do backend:", errorData); // ajuda na depuração
+
+                        if (errorData.errors && Array.isArray(errorData.errors)) {
+                            errorData.errors.forEach(element => {
+                                throw new Error(element.defaultMessage); 
+                            });
+                        } else {
+                            // se não houver lista de errors, mostra a mensagem principal
+                            throw new Error(errorData.message || "Erro ao cadastrar empréstimo.");
+                        }
                     }
                 }).catch(error => {
                     alert(error.message);
@@ -131,63 +139,8 @@
                     alert(error);
                 }
         }
-
-        // fetch("http://localhost:8080/livro/cadastrar-livro", {
-        //     method: "POST",
-        //     headers: {
-        //     "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(dadosLivro)
-        // })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error("Erro ao cadastrar livro");
-        //     }
-        //     return response.json();
-        // })
-        // .then(data => {
-        //     console.log("Livro cadastrado com sucesso:", data);
-        //     return alert("Livro cadastrado com sucesso!");
-        // })
-        // .catch(error => {
-        //     console.error("Erro:", error);
-        // });
        
     });
-
-    // botaoCadastro.addEventListener("click", function() {
-    //     const dadosEditora = {
-    //         nome: "Editora Livros & Cia",
-    //         rua: "Rua das Letras",
-    //         numero: 123,
-    //         cidade: "São Paulo",
-    //         pais: "Brasil",
-    //         cep: "01311-000",
-    //         bairro: "Bela Vista",
-    //         livrosCad: 250
-    //     };
-
-    //     fetch("http://localhost:8080/editora/cadastrar", {
-    //         method: "POST",
-    //         headers: {
-    //         "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(dadosEditora)
-    //     })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //         throw new Error("Erro ao cadastrar editora");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log("Editora cadastrada com sucesso:", data);
-    //     })
-    //     .catch(error => {
-    //         console.error("Erro:", error);
-    //     });
-       
-    // });
     
 </script>
 </body>

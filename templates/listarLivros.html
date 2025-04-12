@@ -81,7 +81,7 @@
             fetch('http://localhost:8080/livro/lista-livros')
             .then(response => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("resposta recebida:", data);
                 let listaLivros = document.getElementById("livros")
 
                 data.forEach((livro) => {
