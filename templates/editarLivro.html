@@ -141,7 +141,7 @@
             document.getElementById("ano").value = data.anoPublicacao;
             document.getElementById("isbn").value = data.isbn;
             document.getElementById("obs").value = data.obs;
-            document.getElementById("edicao").value = edicao;
+            document.getElementById("edicao").value = data.edicao;
 
             document.getElementById("autor").value = data.autor.id;
             document.getElementById("editora").value = data.editora.id;
@@ -176,7 +176,7 @@
     document.getElementById("editarLivro").addEventListener("click", () =>{
         const livroEditado = {
             titulo: document.getElementById("titulo").value,
-            ano: document.getElementById("ano").value,
+            anoPublicacao: document.getElementById("ano").value,
             isbn: document.getElementById("isbn").value,
             autor: {id: parseInt(document.getElementById("autor").value)},
             editora: {id: parseInt(document.getElementById("editora").value)},
@@ -196,6 +196,7 @@
                     },
                     body: JSON.stringify(livroEditado)
                 }).then(async res => {
+                    console.log(livroEditado);
                     if(res.ok){
                         alert("Livro editado com sucesso!")
                         window.location.href = "listarLivros.html";
