@@ -22,6 +22,7 @@
                 <label>Cliente</label>
                 <select class="opcoes1" id="cliente">
                     <option value="">Selecione um cliente</option>
+
                 </select>
             </div>
             <div class = "input-group">
@@ -83,10 +84,12 @@
             let dropdown = document.getElementById("cliente");
 
             data.forEach(cliente => {
+                
                 let option = document.createElement("option");
                 option.value = cliente.id;
                 option.textContent = `${cliente.nome}`;
                 dropdown.appendChild(option);
+                console.log(option);
             })
         })
         .catch(error => console.error("Erro ao carregar os clientes: ", error));
@@ -98,8 +101,8 @@
     botaoCadastro.addEventListener("click", function() {
         event.preventDefault(); //impede que a pagina recarregue automaticamente depois de realizar o cadastro
         const dadosEmp = {
-            livro: {id: parseInt(document.getElementById("livro").value)},
-            cliente: {id: parseInt(document.getElementById("cliente").value)},  
+            livro: {id: parseInt(document.getElementById('livro').value)},
+            cliente: {id: parseInt(document.getElementById('cliente').value)},  
             dataEmp: document.getElementById('dataEmp').value,
             dataDev: document.getElementById('dataDev').value
             

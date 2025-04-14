@@ -20,37 +20,57 @@
                 <label>Ano</label>
                 <input type = "text" class="inputs" id = "ano" required/>
             </div>
-            <div class = "input-group">
+            <!-- <div class = "input-group">
                 <label>Autor*</label>
-                <input type = "text" class="inputs" id = "autor" value = "Machado de Assis" readonly/>
+                <input type = "text" class="inputs" id = "autor"/>
+            </div> -->
+            <div class = "input-group">
+                <label>Autor</label>
+                <select class="opcoes1" id="autor">
+                    <option value="">Selecione um autor</option>
+                </select>
             </div>
             <div class = "input-group">
                 <label>ISBN</label>
                 <input type = "text" class="inputs" id = "isbn"/>
             </div>
-            <div class = "input-group">
+            <!-- <div class = "input-group">
                 <label>Editora*</label>
-                <input type = "text" class="inputs" value="Saraiva" readonly/>
+                <input type = "text" class="inputs" id = "editora"/>
     
+            </div> -->
+            <div class = "input-group">
+                <label>Editora</label>
+                <select class="opcoes1" id="editora">
+                    <option value="">Selecione uma Editora</option>
+                </select>
             </div>
             <div class = "input-group">
                 <label>Edição</label>
                 <input type = "text" class="inputs" id = "edicao" required/>
             </div>
             <div class = "input-group">
+                <label>Estado</label>
+                <select class = "opcoes1" id = "estado">
+                    <option value="NOVO">Novo</option>
+                    <option value="BOM">Bom</option>
+                    <option value="DANIFICADO">Danificado</option>
+                </select>
+            </div>
+            <div class = "input-group">
                 <label>Observações</label>
-                <textarea id = "descricao" class="inputs" placeholder="Página rasgada, lombada danificada..."></textarea>
+                <textarea id = "obs" class="inputs" placeholder="Página rasgada, lombada danificada..."></textarea>
             </div>
 
             <div class = "input-group">
                 <label>Status</label>
-                <input type = "text" class="inputs" id = "qtd" value = "Disponível" readonly/>
+                <input type = "text" class="inputs" id = "status" readonly/>
             </div>
 
         </form>
-        <button class="btnEditarLivro">Salvar alterações</button>
+        <button class="btnEditarLivro" id="editarLivro">Salvar alterações</button>
         <a href="emprestarLivro.html">
-            <button class="btnEditarLivro" type = "reset">Emprestar Livro</button> 
+            <button class="btnEditarLivro" type = "reset" >Emprestar Livro</button> 
         </a>
 
     </div>
@@ -73,5 +93,128 @@
         </div>
     </nav>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const autoresPromise = fetch("http://localhost:8080/autor/lista-autores")
+        .then(res => res.json())
+        .then(data => {
+            let dropdown = document.getElementById("autor");
+
+            data.forEach(autor => {
+                let option = document.createElement("option");
+                option.value = autor.id;
+                option.textContent = `${autor.nome}`;
+                dropdown.appendChild(option);
+            })
+            carregarDados();
+        })
+
+        const editorasPromise = fetch("http://localhost:8080/editora/lista-editoras")
+        .then(res => res.json())
+        .then((data) => {
+
+            let dropdown = document.getElementById("editora");
+
+            data.forEach(editora => {
+                let option = document.createElement("option");
+                option.value = editora.id;
+                option.textContent = `${editora.nome}`;
+                dropdown.appendChild(option);
+            });
+        });
+        Promise.all([autoresPromise, editorasPromise])
+        .then(() => carregarDados())
+        .catch(error => console.error("Erro ao carregar: ", error));
+    })
+
+    function carregarDados() {
+        const params = new URLSearchParams(window.location.search);
+        const livroId = params.get("id");
+
+        if (!livroId) return;
+
+        fetch(`http://localhost:8080/livro/busca-livro/${livroId}`)
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("titulo").value = data.titulo;
+            document.getElementById("ano").value = data.anoPublicacao;
+            document.getElementById("isbn").value = data.isbn;
+            document.getElementById("obs").value = data.obs;
+            document.getElementById("edicao").value = edicao;
+
+            document.getElementById("autor").value = data.autor.id;
+            document.getElementById("editora").value = data.editora.id;
+            document.getElementById("status").value = data.status;
+            document.getElementById("estado").value = data.estadoCons;
+
+            // let autorNome = `${data.autor.nome}`;
+            // let optionsAutor = document.getElementById("autor").options;
+            // for(let i = 0; i < optionsAutor.length; i++){
+            //     if(optionsAutor[i].textContent === autorNome){
+            //         document.getElementById("autor").selectedIndex = i;
+            //         break;
+            //     }
+            // }
+
+            // let editoraNome = `${data.editora.nome}`;
+            // let optionsEditora = document.getElementById("editora").optionsEditora;
+            // for(let i = 0; i<optionsEditora.length; i++){
+            //     if(optionsEditora[i].textContent === editoraNome){
+            //         document.getElementById("editora").selectedIndex = i;
+            //         break;
+            //     }
+            // }
+
+            console.log("dados livro:", data);
+        })
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const livroId = params.get("id");
+
+    document.getElementById("editarLivro").addEventListener("click", () =>{
+        const livroEditado = {
+            titulo: document.getElementById("titulo").value,
+            ano: document.getElementById("ano").value,
+            isbn: document.getElementById("isbn").value,
+            autor: {id: parseInt(document.getElementById("autor").value)},
+            editora: {id: parseInt(document.getElementById("editora").value)},
+            obs: document.getElementById('obs').value,
+            edicao: document.getElementById('edicao').value,
+            estadoCons: document.getElementById('estado').value,
+
+        }
+        if(livroEditado.titulo == "" || livroEditado.autor == "" || livroEditado.editora == "" || livroEditado.isbn == "" || livroEditado.edicao == "" || livroEditado.estadoCons == ""){
+            alert("Preencha todos os campos!");
+        } else{
+            try{
+                fetch(`http://localhost:8080/livro/editar/${livroId}`, {
+                    method: 'PUT',
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify(livroEditado)
+                }).then(async res => {
+                    if(res.ok){
+                        alert("Livro editado com sucesso!")
+                        window.location.href = "listarLivros.html";
+                    } else{
+                        const errorData = await r.json();
+            errorData.errors.forEach(element => {
+              throw new Error(element.defaultMessage);
+            }); 
+          }
+        }).catch(error => {
+        alert(error.message);
+    });         
+        } catch (error) {
+          alert(error);
+        }
+
+      
+
+    }})
+</script>
 </html>
 

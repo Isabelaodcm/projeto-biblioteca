@@ -99,14 +99,20 @@
                     <a href="detalhesLivros.html">
                             <button class="btnAcoes">Detalhes</button>
                     </a>
-                    <a href="editarAutor.html">
-                            <button class="btnAcoes">Editar</button>
-                    </a>
+                    <button class="editar" value = "${livro.id}">Editar</button>
                     <button id = "btnExcluir" class="btnAcoes" value= "${livro.id}">Excluir</button></td>
                 `;
                         listaLivros.appendChild(tr);            
                 });
             });
+        });
+
+        document.addEventListener("click", function(event){
+            if(event.target.classList.contains("editar")){
+                const livroId = event.target.closest("tr").value;
+                window.location.href = `editarLivro.html?id=${livroId}`;
+            }
+
         });
         // document.addEventListener("DOMContentLoaded", function () {
         //     fetch('http://localhost:8080/livro/lista-livros')
