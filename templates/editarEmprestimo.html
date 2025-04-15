@@ -3,13 +3,13 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Cadastrar Empréstimo</title>
+    <title>Editar Emprestimo</title>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 
 <body>
     <div class = content>
-        <h1>Cadastrar Empréstimo</h1>
+        <h1>Editar Emprestimo</h1>
         <form class="forms">
             <div class = "input-group">
                 <label>Livro</label>
@@ -34,9 +34,8 @@
                 <label>Data de Devolução</label>
                 <input type = "date" class="inputs" id = "dataDev" required/>
             </div>
-        
-            <button id="cadastrar" class="button">Cadastrar</button>
         </form>
+        <button class="btnEditarLivro" id="editar">Salvar alterações</button>
 
     </div>
     
@@ -53,17 +52,17 @@
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
             <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li>
-    
+            
         </ul>
         </div class = "btn-sair">
             <a href = "login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
-
+</body>
 
 <script>
     document.addEventListener("DOMContentLoaded", function(){
-        fetch("http://localhost:8080/livro/lista-livros")
+        const livrosPromise = fetch("http://localhost:8080/livro/lista-livros")
         .then(res => res.json())
         .then(data => {
             let dropdown = document.getElementById("livro");
@@ -74,81 +73,90 @@
                 option.textContent = `${livro.titulo}`;
                 dropdown.appendChild(option);
             })
+            carregarDados();
         })
-    })
 
-    document.addEventListener("DOMContentLoaded", function(){
-        fetch("http://localhost:8080/cliente/lista-clientes")
+        const clientePromise = fetch(`http://localhost:8080/cliente/lista-clientes`)
         .then(res => res.json())
-        .then((data) => {
-
-            let dropdown = document.getElementById("cliente");
+        .then(data => {
+            let dropdown = document.getElementById("cliente")
 
             data.forEach(cliente => {
-                
                 let option = document.createElement("option");
                 option.value = cliente.id;
                 option.textContent = `${cliente.nome}`;
                 dropdown.appendChild(option);
-                console.log(option);
             })
+
+            carregarDados();
         })
-        .catch(error => console.error("Erro ao carregar os clientes: ", error));
+        
+        Promise.all([livrosPromise, clientePromise])
+        .then(() => carregarDados())
+        .catch(error => console.error("Erro ao carregar: ", error));
     })
 
-    var botaoCadastro = document.getElementById("cadastrar");
-    console.log(botaoCadastro)
+    function carregarDados() {
+        const params = new URLSearchParams(window.location.search);
+        const emprestimoId = params.get("id");
+
+        if (!emprestimoId) return;
+
+        fetch(`http://localhost:8080/emprestimo/busca-emprestimo/${emprestimoId}`)
+        .then((res) => res.json())
+        .then((data) => {
+            document.getElementById("livro").value = data.livro.id;
+            document.getElementById("cliente").value = data.cliente.id;
+            document.getElementById("dataEmp").value = data.dataEmp;
+            document.getElementById("dataDev").value = data.dataDev;
+
+            console.log("dados emprestimo:", data);
+        })
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const emprestimoId = params.get("id");
+
+    document.getElementById("editar").addEventListener("click", () =>{
+        const emprestimoEditado = {
+            dataEmp: document.getElementById("dataEmp").value,
+            dataDev: document.getElementById("dataDev").value,
+            livro: {id: parseInt(document.getElementById("livro").value)},
+            cliente: {id: parseInt(document.getElementById("cliente").value)},
     
-    botaoCadastro.addEventListener("click", function() {
-        event.preventDefault(); //impede que a pagina recarregue automaticamente depois de realizar o cadastro
-        const dadosEmp = {
-            livro: {id: parseInt(document.getElementById('livro').value)},
-            cliente: {id: parseInt(document.getElementById('cliente').value)},  
-            dataEmp: document.getElementById('dataEmp').value,
-            dataDev: document.getElementById('dataDev').value
-            
-        };
-        
-        if(dadosEmp.livro == "" || dadosEmp.cliente == "" || dadosEmp.dataDev == "" || dadosEmp.dataEmp == "" ){
-            alert("Preencha todos os campos!");
-        } else {
-            try{
-                console.log("Dados enviados:", dadosEmp);
-                fetch("http://localhost:8080/emprestimo/cadastrar", {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(dadosEmp) //converte os dados para json
-                }).then(async res => {
-                    if(res.ok){
 
-
-                        alert("Empréstimo cadastrado com sucesso!")
-                    } else{
-                        const errorData = await res.json();
-                        console.log("Erro do backend:", errorData); // ajuda na depuração
-
-                        if (errorData.errors && Array.isArray(errorData.errors)) {
-                            errorData.errors.forEach(element => {
-                                throw new Error(element.defaultMessage); 
-                            });
-                        } else {
-                            // se não houver lista de errors, mostra a mensagem principal
-                            throw new Error(errorData.message || "Erro ao cadastrar empréstimo.");
-                        }
-                    }
-                }).catch(error => {
-                    alert(error.message);
-            });
-                } catch (error) {
-                    alert(error);
-                }
         }
-       
-    });
-    
+        if(emprestimoEditado.livro == "" || emprestimoEditado.cliente == "" || emprestimoEditado.dataDev == "" || emprestimoEditado.dataEmp == "" ){
+            alert("Preencha todos os campos!");
+        } else{
+            try{
+                fetch(`http://localhost:8080/emprestimo/editar/${emprestimoId}`, {
+                    method: 'PUT',
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify(emprestimoEditado)
+                }).then(async res => {
+                    console.log(emprestimoEditado);
+                    if(res.ok){
+                        alert("Emprestimo editado com sucesso!")
+                        // window.location.href = "listarEmprestimos.html";
+                    } else{
+                        const errorData = await r.json();
+            errorData.errors.forEach(element => {
+              throw new Error(element.defaultMessage);
+            }); 
+          }
+        }).catch(error => {
+        alert(error.message);
+    });         
+        } catch (error) {
+          alert(error);
+        }
+
+      
+
+    }})
 </script>
-</body>
 </html>
 

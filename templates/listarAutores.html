@@ -62,10 +62,12 @@
             <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
-            <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li> 
+            <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li>
         </ul>
         
         </div class = "btn-sair">
@@ -92,10 +94,10 @@
                     <td>${autor.anoNasc || '-'} </td>
                     <td>${autor.anoFalesc || '-'} </td>
                     <td>${autor.livrosCad || '-'} </td>
+                    
                     <td>
-                    <a href="editarAutor.html">
-                            <button class="btnAcoes">Editar</button>
-                    </a>
+                    <button class="editar">Editar</button>
+                    
                     <button class="btnExcluir" value= "${autor.id}">Excluir</button></td>
                 `;
                         listaAutores.appendChild(tr);
@@ -128,6 +130,12 @@
             }
         });
 
+        document.addEventListener("click", function(event){
+            if(event.target.classList.contains("editar")){
+                const autorId = event.target.closest("tr").value;
+                window.location.href = `editarAutor.html?id=${autorId}`;
+            }
+        });
     </script>
 </body>
 </html>

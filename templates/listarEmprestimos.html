@@ -69,6 +69,8 @@
             <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -98,15 +100,24 @@
                     <td> ${emprestimo.dataEmp|| '-'} </td>
                     <td> ${emprestimo.dataDev|| '-'} </td>
                     <td> ${emprestimo.status|| '-'} </td>
-                    <a href="editarAutor.html">
-                            <button class="btnAcoes">Editar</button>
-                    </a>
+                    
+                    <button class="editar">Editar</button>
+    
                     <button class="btnExcluir" value= "${emprestimo.id}">Excluir</button></td>
                 `;
                     listaEmprestimos.appendChild(tr);
 
                 });
             });
+        });
+
+
+        document.addEventListener("click", function(event){
+            if(event.target.classList.contains("editar")){
+                const emprestimoId = event.target.closest("tr").value;
+                window.location.href = `editarEmprestimo.html?id=${emprestimoId}`;
+            }
+
         });
     </script>
 </body>

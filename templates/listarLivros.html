@@ -9,53 +9,71 @@
 </head>
 
 <body>
-    <div class="content">
-        <h1>Todos os Livros</h1>
-        <div class="searchbar">
-            <input type="text" class="input-searchbar" id="pesquisar" placeholder="Pesquisar livro..." />
-            <button type="submit" class="btn-search">Pesquisar</button>
+    <div class = "background">
+        <div class="content">
+            <h1>Todos os Livros</h1>
+            <div class="searchbar">
+                <input type="text" class="input-searchbar" id="pesquisar" placeholder="Pesquisar livro..." />
+                <button type="submit" class="btn-search">Pesquisar</button>
 
-            <!-- <a  href = "livrosEmprestados.html" >
-                <button type="submit" class="btn-search">Ver livros emprestados</button>
-            </a> -->
+                <!-- <a  href = "livrosEmprestados.html" >
+                    <button type="submit" class="btn-search">Ver livros emprestados</button>
+                </a> -->
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Editora</th>
+                        <th>Ano de Publicação</th>
+                        <th>Edição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="livros">
+                    <!-- Exemplo de linha de livro -->
+                    <tr>
+                        <td>0</td>
+                        <td>O Senhor dos Anéis</td>
+                        <td>J.R.R. Tolkien</td>
+                        <td>HarperCollins</td>
+                        <td>1954</td>
+                        <td>1ª</td>
+                        <td>Disponível</td>
+                        <td>
+                            <a href="detalhesLivros.html">
+                                <button class="btnAcoes">Detalhes</button>
+                            </a>
+                            <a href="editarLivro.html">
+                                <button class="btnAcoes">Editar</button>
+                            </a>
+                            <button class="btnAcoes">Excluir</button>
+                        </td>
+                    </tr>
+
+                    <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Editora</th>
-                    <th>Ano de Publicação</th>
-                    <th>Edição</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="livros">
-                <!-- Exemplo de linha de livro -->
-                <tr>
-                    <td>0</td>
-                    <td>O Senhor dos Anéis</td>
-                    <td>J.R.R. Tolkien</td>
-                    <td>HarperCollins</td>
-                    <td>1954</td>
-                    <td>1ª</td>
-                    <td>Disponível</td>
-                    <td>
-                        <a href="detalhesLivros.html">
-                            <button class="btnAcoes">Detalhes</button>
-                        </a>
-                        <a href="editarLivro.html">
-                            <button class="btnAcoes">Editar</button>
-                        </a>
-                        <button class="btnAcoes">Excluir</button>
-                    </td>
-                </tr>
-
-                <!-- Adicione mais linhas conforme necessário -->
-            </tbody>
+        <div class="modal" id = "modal">
+            <div class="modalContent">
+                <span id="close" class="closeModal">&times;</span>
+                <h2 class="tituloModal" >Detalhes do Livro</h2>
+                <p><strong>Título:</strong> <span id = "tituloModal"> </span></p>
+                <p><strong>Autor:</strong> <span  id = "autorModal"> </span></p>
+                <p><strong>Editora:</strong> <span id = "editoraModal"></span></p>
+                <p><strong>Ano de Publicação:</strong> <span id = "anoModal"></span></p>
+                <p><strong>ISBN:</strong> <span id = "isbnModal"></span></p>
+                <p><strong>Edição:</strong> <span id = "edicaoModal"></span></p>
+                <p><strong>Status:</strong> <span id = "statusModal"></span></p>
+                <p><strong>Observações:</strong> <span id = "obsModal"></span></p>
+    
+                <!-- <button class="buttonModal"> Voltar </button> -->
+            </div>
+        </div>
 
     </div>
 
@@ -63,21 +81,28 @@
 
         <h2 class="menu">Menu</h2>
         <ul>
-            <li><a href="cadastrarLivro.html">Cadastrar Livro</a></li>
-            <li><a href="cadastrarAutor.html">Cadastrar Autor</a></li>
-            <li><a href="cadastrarEditora.html">Cadastrar Editora</a></li>
-            <li><a href="listarLivros.html">Todos os Livros</a></li>
-            <li><a href="listarAutores.html">Todos os Autores</a></li>
-            <li><a href="listarEditoras.html">Todas as Editoras</a></li>
-            <li><a href="listarEmprestimos.html">Todos os Empréstimos</a></li>
+            <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
+            <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
+            <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
+            <li><a href = "listarLivros.html">Todos os Livros</a></li>
+            <li><a href = "listarAutores.html">Todos os Autores</a></li>
+            <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
+            <li><a href = "listarEmprestimos.html">Todos os Empréstimos</a></li>
 
         </ul>
         </div class="btn-sair">
         <a href="login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
+
     <script>
         document.addEventListener("DOMContentLoaded", function(){
+            const modal = document.getElementById("modal");
+            const openModal = document.getElementById("detalhes");
+            const closeModal = document.getElementById("close");
+            
             fetch('http://localhost:8080/livro/lista-livros')
             .then(response => response.json())
             .then((data) => {
@@ -96,15 +121,47 @@
                     <td>${livro.edicao|| '-'} </td>
                     <td>${livro.status|| '-'} </td>
                     <td>
-                    <a href="detalhesLivros.html">
-                            <button class="btnAcoes">Detalhes</button>
-                    </a>
+
+                    <button class="detalhes" id = "detalhes" value = "${livro.id}">Detalhes</button>
                     <button class="editar" value = "${livro.id}">Editar</button>
                     <button id = "btnExcluir" class="btnAcoes" value= "${livro.id}">Excluir</button></td>
                 `;
-                        listaLivros.appendChild(tr);            
+                    tr.dataset.livro = JSON.stringify(livro);
+                    listaLivros.appendChild(tr);            
+                });
+
+                modal.style.display = 'none';
+
+                listaLivros.addEventListener("click", function(event){
+                    if (event.target.classList.contains("detalhes")){
+                        const tr = event.target.closest("tr");
+                        const livro = JSON.parse(tr.dataset.livro);
+
+                        document.getElementById("tituloModal").textContent = livro.titulo || "-";
+                        document.getElementById("autorModal").textContent = livro.autor.nome || "-";
+                        document.getElementById("editoraModal").textContent = livro.editora.nome || "-";
+                        document.getElementById("anoModal").textContent = livro.anoPublicacao || "-";
+                        document.getElementById("isbnModal").textContent = livro.isbn || "-";
+                        document.getElementById("edicaoModal").textContent = livro.edicao || "-";
+                        document.getElementById("statusModal").textContent = livro.status || "-";
+                        document.getElementById("obsModal").textContent = livro.obs || "-";
+
+
+                        modal.style.display = 'block';
+                    }
                 });
             });
+
+            closeModal.onclick = closeModal.onclick = () => {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal){
+                    modal.style.display = 'none';
+                }
+            }
+
         });
 
         document.addEventListener("click", function(event){
@@ -142,7 +199,10 @@
 
         //         });
         // });
+
+
     </script>
+    
 </body>
 
 </html>

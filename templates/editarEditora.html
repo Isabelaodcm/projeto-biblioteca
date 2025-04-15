@@ -13,23 +13,23 @@
         <form class="forms">
             <div class = "input-group">
                 <label for = "nomeEditora" >Nome</label>
-                <input type = "text" class="inputs" id = "nomeEditora" required/>
+                <input type = "text" class="inputs" id = "nome" required/>
             </div>
     
             <div class = "input-group">
                 <label for = "cidadeEditora" >Cidade</label>
-                <input type = "text" class="inputs" id = "cidadeEditora" required/>
+                <input type = "text" class="inputs" id = "cidade" required/>
             </div>
 
 
             <div class = "input-group">
                 <label for = "cepEditora">CEP</label>
-                <input type = "text" class="inputs" id = "cepEditora"/>
+                <input type = "text" class="inputs" id = "cep"/>
             </div>
 
             <div class = "input-group">
                 <label for = "paisEditora">País</label>
-                <input type = "text" class="inputs" id = "paisEditora" required/>
+                <input type = "text" class="inputs" id = "pais" required/>
             </div>
             <div class = "input-group">
                 <label for = "rua">Rua</label>
@@ -43,10 +43,10 @@
 
             <div class = "input-group">
                 <label for = "bairro-editora" >Bairro</label>
-                <input type = "text" class="inputs" id = "bairroEditora" required/>
+                <input type = "text" class="inputs" id = "bairro" required/>
             </div>
         </form>
-        <button class="btnEditar">Salvar alterações</button>
+        <button class="btnEditar" id = "editarEditora">Salvar alterações</button>
 
     </div>
     
@@ -57,6 +57,8 @@
             <li><a href = "cadastrarLivro.html">Cadastrar Livro</a></li>
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
+            <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -69,5 +71,79 @@
         </div>
     </nav>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        carregarDados();
+        function carregarDados() {
+            const params = new URLSearchParams(window.location.search);
+            const editoraId = params.get("id");
+
+            if (!editoraId) return;
+
+            fetch(`http://localhost:8080/editora/busca-editora/${editoraId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                document.getElementById("nome").value = data.nome;
+                document.getElementById("cidade").value = data.cidade;
+                document.getElementById("pais").value = data.pais;
+                document.getElementById("cep").value = data.cep;
+                document.getElementById("rua").value = data.rua;
+                document.getElementById("bairro").value = data.bairro;
+                document.getElementById("numero").value = data.numero;
+
+                console.log("dados editora:", data);
+            })
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const editoraId = params.get("id");
+
+        document.getElementById("editarEditora").addEventListener("click", () =>{
+            const editoraEditada = {
+                nome: document.getElementById("nome").value,
+                cidade: document.getElementById("cidade").value,
+                pais: document.getElementById("pais").value,
+                cep: document.getElementById("cep").value,
+                rua: document.getElementById("rua").value,
+                bairro: document.getElementById("bairro").value,
+                numero: document.getElementById("numero").value,
+                
+            }
+            if(editoraEditada.nome == "" || editoraEditada.cidade == "" || editoraEditada.pais == "" || editoraEditada.cep == "" || editoraEditada.rua == "" 
+            || editoraEditada.bairro == "" || editoraEditada.numero == ""){
+                alert("Preencha todos os campos!");
+            } else{
+                try{
+                    fetch(`http://localhost:8080/editora/editar/${editoraId}`, {
+                        method: 'PUT',
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body: JSON.stringify(editoraEditada)
+                    }).then(async res => {
+                        console.log(editoraEditada);
+                        if(res.ok){
+                            alert("Editora editada com sucesso!")
+                            window.location.href = "listarEditoras.html";
+                        } else{
+                            const errorData = await r.json();
+                errorData.errors.forEach(element => {
+                throw new Error(element.defaultMessage);
+                }); 
+            }
+            }).catch(error => {
+            alert(error.message);
+        });         
+            } catch (error) {
+            alert(error);
+            }
+
+        
+
+        }})
+    })
+</script>
+
 </html>
 
