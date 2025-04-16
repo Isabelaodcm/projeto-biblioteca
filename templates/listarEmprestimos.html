@@ -40,11 +40,12 @@
                     <td>10/03/2025</td>
                     <td>30/03/2025</td>
                     <td>
-                        <select class = "opcoes">
+                        <!-- <select class = "opcoes">
                             <option>Pendente</option>
                             <option>Devolvido</option>
                             <option>Atrasado</option>
-                        </select>
+                        </select> -->
+                        PENDENTE
                     <td>
                         <!-- <a href="detalhesEmprestimo.html">
                             <button class="btnAcoes">Detalhes</button>
@@ -52,7 +53,7 @@
                         <a href="editarEmprestimo.html">
                             <button class="btnAcoes">Editar</button>
                         </a> -->
-                        <button class="btnAcoes">Detalhes</button>
+                        <!-- <button class="btnAcoes">Detalhes</button> -->
                         <button class="btnAcoes">Editar</button>
                         <button class="btnAcoes">Excluir</button>
                     </td>
@@ -70,7 +71,7 @@
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
             <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
-            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Cliente</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -101,8 +102,8 @@
                     <td> ${emprestimo.dataDev|| '-'} </td>
                     <td> ${emprestimo.status|| '-'} </td>
                     
+                    <td>
                     <button class="editar">Editar</button>
-    
                     <button class="btnExcluir" value= "${emprestimo.id}">Excluir</button></td>
                 `;
                     listaEmprestimos.appendChild(tr);
@@ -111,7 +112,36 @@
             });
         });
 
+        function excluirEmprestimo(empId, botao){
+            fetch(`http://localhost:8080/emprestimo/excluir/${empId}`,{
+                method:'DELETE'
+            })
+            .then((res) =>{
+                if(res.ok){
+                    alert("Empréstimo excluído com sucesso!");
+                    const linha = botao.closest("tr");
+                    if(linha){
+                        linha.remove();
+                    }
+                } else{
+                    alert("Erro ao excluir.")
+                    return res.text().then((text) => {});
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao excluir o emprestimo:", error);
+            });
+        }
 
+        document
+        .querySelector("tbody")
+        .addEventListener("click", function(event){
+            if(event.target.classList.contains("btnExcluir")){
+                const empId = event.target.getAttribute("value");
+                excluirEmprestimo(empId, event.target);
+            }
+        })
+        
         document.addEventListener("click", function(event){
             if(event.target.classList.contains("editar")){
                 const emprestimoId = event.target.closest("tr").value;

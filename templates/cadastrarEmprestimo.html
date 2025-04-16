@@ -71,7 +71,7 @@
             data.forEach(livro => {
                 let option = document.createElement("option");
                 option.value = livro.id;
-                option.textContent = `${livro.titulo}`;
+                option.textContent = `${livro.id} - ${livro.titulo} - ${livro.status}`;
                 dropdown.appendChild(option);
             })
         })
@@ -88,7 +88,7 @@
                 
                 let option = document.createElement("option");
                 option.value = cliente.id;
-                option.textContent = `${cliente.nome}`;
+                option.textContent = `${cliente.id} - ${cliente.nome}`;
                 dropdown.appendChild(option);
                 console.log(option);
             })

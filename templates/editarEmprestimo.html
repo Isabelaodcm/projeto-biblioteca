@@ -34,6 +34,15 @@
                 <label>Data de Devolução</label>
                 <input type = "date" class="inputs" id = "dataDev" required/>
             </div>
+
+            <div class="input-group"> 
+                <label>Status do Empréstimo</label>
+                <select class="opcoes1" id = "status">
+                    <option value="PENDENTE">Pendente</option>
+                    <option value="ATRASADO">Atrasado</option>
+                    <option value="DEVOLVIDO">Devolvido</option>
+                </select>
+            </div>
         </form>
         <button class="btnEditarLivro" id="editar">Salvar alterações</button>
 
@@ -109,6 +118,7 @@
             document.getElementById("cliente").value = data.cliente.id;
             document.getElementById("dataEmp").value = data.dataEmp;
             document.getElementById("dataDev").value = data.dataDev;
+            document.getAnimations("status").value = data.status;
 
             console.log("dados emprestimo:", data);
         })
@@ -123,6 +133,7 @@
             dataDev: document.getElementById("dataDev").value,
             livro: {id: parseInt(document.getElementById("livro").value)},
             cliente: {id: parseInt(document.getElementById("cliente").value)},
+            status: document.getElementById("status").value,
     
 
         }
@@ -140,7 +151,7 @@
                     console.log(emprestimoEditado);
                     if(res.ok){
                         alert("Emprestimo editado com sucesso!")
-                        // window.location.href = "listarEmprestimos.html";
+                        window.location.href = "listarEmprestimos.html";
                     } else{
                         const errorData = await r.json();
             errorData.errors.forEach(element => {

@@ -65,6 +65,7 @@
                 <p><strong>Título:</strong> <span id = "tituloModal"> </span></p>
                 <p><strong>Autor:</strong> <span  id = "autorModal"> </span></p>
                 <p><strong>Editora:</strong> <span id = "editoraModal"></span></p>
+                <p><strong>Estado de Conservação:</strong> <span id = "estadoConsModal"></span></p>
                 <p><strong>Ano de Publicação:</strong> <span id = "anoModal"></span></p>
                 <p><strong>ISBN:</strong> <span id = "isbnModal"></span></p>
                 <p><strong>Edição:</strong> <span id = "edicaoModal"></span></p>
@@ -85,7 +86,7 @@
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
             <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
-            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Cliente</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -124,7 +125,7 @@
 
                     <button class="detalhes" id = "detalhes" value = "${livro.id}">Detalhes</button>
                     <button class="editar" value = "${livro.id}">Editar</button>
-                    <button id = "btnExcluir" class="btnAcoes" value= "${livro.id}">Excluir</button></td>
+                    <button class="btnExcluir" value= "${livro.id}">Excluir</button></td>
                 `;
                     tr.dataset.livro = JSON.stringify(livro);
                     listaLivros.appendChild(tr);            
@@ -140,6 +141,7 @@
                         document.getElementById("tituloModal").textContent = livro.titulo || "-";
                         document.getElementById("autorModal").textContent = livro.autor.nome || "-";
                         document.getElementById("editoraModal").textContent = livro.editora.nome || "-";
+                        document.getElementById("estadoConsModal").textContent = livro.estadoCons || "-";
                         document.getElementById("anoModal").textContent = livro.anoPublicacao || "-";
                         document.getElementById("isbnModal").textContent = livro.isbn || "-";
                         document.getElementById("edicaoModal").textContent = livro.edicao || "-";
@@ -171,6 +173,36 @@
             }
 
         });
+
+        function excluirLivro(livroId, botao){
+            fetch(`http://localhost:8080/livro/excluir/${livroId}`, {
+                method: 'DELETE'
+            })
+            .then((res) => {
+                if(res.ok){
+                    alert("Livro excluído com sucesso!")
+                    const linha = botao.closest("tr");
+                    if (linha){
+                        linha.remove();
+                    }
+                } else {
+                    alert("Erro ao excluir. Esse livro já está associado a um empréstimo.");
+                    return response.text().then((text) => {});
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao excluir o livro:", error);
+            });
+        }
+
+        document
+        .querySelector("tbody")
+        .addEventListener("click", function(event){
+            if(event.target.classList.contains("btnExcluir")){
+                const livroId = event.target.getAttribute("value");
+                excluirLivro(livroId, event.target);
+            }
+        })
         // document.addEventListener("DOMContentLoaded", function () {
         //     fetch('http://localhost:8080/livro/lista-livros')
         //         .then(response => response.json())

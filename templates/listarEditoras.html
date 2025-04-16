@@ -33,7 +33,7 @@
             </thead>
             <tbody id = "editoras">
                 <!-- Exemplo de linha de editora -->
-                <tr>
+                <!-- <tr>
                     <td>0 </td>
                     <td>Companhia das Letras</td>
                     <td>Brasil</td>
@@ -44,15 +44,14 @@
                     <td>1000</td>
                     <td>
                         <a href="detalhesEditora.html">
-                            <!-- <button class="btnAcoes">Detalhes</button> -->
+                            <button class="btnAcoes">Detalhes</button> 
                         </a>
                         <a href="editarEditora.html">
                             <button class="btnAcoes">Editar</button>
                         </a>
                         <button class="btnAcoes">Excluir</button>
                     </td>
-                </tr>
-                <!-- Adicione mais linhas conforme necessário -->
+                </tr>  -->
             </tbody>
 
     </div>
@@ -65,7 +64,7 @@
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
             <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
-            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Cliente</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -91,13 +90,13 @@
                         tr.value = editora.id;
                         tr.innerHTML = `
                     <td>${editora.id} </td>
-                    <td>${editora.nome} </td>
-                    <td>${editora.pais} </td>
-                    <td>${editora.cidade} </td>
-                    <td>${editora.bairro} </td>
-                    <td>${editora.cep} </td>
-                    <td>${editora.rua} </td>
-                    <td>${editora.numero} </td>
+                    <td>${editora.nome || '-'} </td>
+                    <td>${editora.pais || '-'} </td>
+                    <td>${editora.cidade || '-'} </td>
+                    <td>${editora.bairro || '-'} </td>
+                    <td>${editora.cep || '-'} </td>
+                    <td>${editora.rua || '-'} </td>
+                    <td>${editora.numero || '-'} </td>
                     <td>
 
                     <button class="editar">Editar</button>
@@ -115,6 +114,37 @@
                 window.location.href = `editarEditora.html?id=${autorId}`;
             }
         });
+
+        function excluirEditora(editoraId, botao){
+            fetch(`http://localhost:8080/editora/excluir/${editoraId}`,{
+                method: 'DELETE'
+            })
+            .then((res) => {
+                if(res.ok){
+                    alert("Editora excluída com sucesso!");
+                    const linha = botao.closest("tr");
+                    if(linha){
+                        linha.remove();
+                    }
+                } else {
+                    alert("Erro ao excluir. A editora está associada a um livro.");
+                    return res.text().then((text) => {});
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao excluir a editora: ", error);
+            })
+        }
+
+        document
+        .querySelector("tbody")
+        .addEventListener("click", function(event){
+            if(event.target.classList.contains("btnExcluir")){
+                const editoraId = event.target.getAttribute("value");
+                excluirEditora(editoraId, event.target);
+            }
+        })
     </script>
+
 </body>
 </html>

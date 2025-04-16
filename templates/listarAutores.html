@@ -63,7 +63,7 @@
             <li><a href = "cadastrarAutor.html">Cadastrar Autor</a></li>
             <li ><a href = "cadastrarEditora.html">Cadastrar Editora</a></li>
             <li><a href="cadastrarEmprestimo.html">Cadastrar Empréstimo</a></li>
-            <li><a href="cadastrarCliente.html">Cadastrar Empréstimo</a></li>
+            <li><a href="cadastrarCliente.html">Cadastrar Cliente</a></li>
             <li><a href = "listarLivros.html">Todos os Livros</a></li>
             <li><a href = "listarAutores.html">Todos os Autores</a></li>
             <li><a href = "listarEditoras.html">Todas as Editoras</a></li>
@@ -113,9 +113,13 @@
             })
             .then(response => {
                 if(response.ok){
-                    alert("Autor excluído com sucesso!")
+                    alert("Autor excluído com sucesso!");
+                    const linha = botao.closest("tr")
+                    if(linha){
+                        linha.remove();
+                    }
                 } else{
-                    alert("Erro ao excluir o autor.");
+                    alert("Erro ao excluir. Este autor está associado a um livro.");
                     return response.text().then((text) => {});
                 }
             })
