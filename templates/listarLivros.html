@@ -187,7 +187,7 @@
                     }
                 } else {
                     alert("Erro ao excluir. Esse livro já está associado a um empréstimo.");
-                    return response.text().then((text) => {});
+                    return res.text().then((text) => {});
                 }
             })
             .catch((error) => {

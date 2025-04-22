@@ -47,8 +47,9 @@
             </div>
 
             <div>
-                
+
             </div>
+            
             <button class="btnEditar" id = "editarEditora">Salvar alterações</button>
 
         </form>
@@ -106,6 +107,7 @@
         const editoraId = params.get("id");
 
         document.getElementById("editarEditora").addEventListener("click", () =>{
+            event.preventDefault();
             const editoraEditada = {
                 nome: document.getElementById("nome").value,
                 cidade: document.getElementById("cidade").value,
@@ -133,7 +135,7 @@
                             alert("Editora editada com sucesso!")
                             window.location.href = "listarEditoras.html";
                         } else{
-                            const errorData = await r.json();
+                            const errorData = await res.json();
                 errorData.errors.forEach(element => {
                 throw new Error(element.defaultMessage);
                 }); 

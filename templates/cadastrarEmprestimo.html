@@ -122,8 +122,6 @@
                     body: JSON.stringify(dadosEmp) //converte os dados para json
                 }).then(async res => {
                     if(res.ok){
-
-
                         alert("Empréstimo cadastrado com sucesso!")
                     } else{
                         const errorData = await res.json();
@@ -139,7 +137,8 @@
                         }
                     }
                 }).catch(error => {
-                    alert(error.message);
+                    alert("Erro ao cadastrar. Este livro já está associado a outro empréstimo.");
+                    console.log(error.message);
             });
                 } catch (error) {
                     alert(error);

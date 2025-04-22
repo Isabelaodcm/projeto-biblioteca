@@ -109,7 +109,7 @@
             data.forEach(autor => {
                 let option = document.createElement("option");
                 option.value = autor.id;
-                option.textContent = `${autor.nome}`;
+                option.textContent = `${autor.id} - ${autor.nome}`;
                 dropdown.appendChild(option);
             })
             carregarDados();
@@ -124,7 +124,7 @@
             data.forEach(editora => {
                 let option = document.createElement("option");
                 option.value = editora.id;
-                option.textContent = `${editora.nome}`;
+                option.textContent = `${editora.id} - ${editora.nome}`;
                 dropdown.appendChild(option);
             });
         });
